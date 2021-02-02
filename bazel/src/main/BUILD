@@ -1,5 +1,9 @@
+load("@rules_java//java:defs.bzl", "java_library", "java_binary")
 load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library")
-load("@rules_java//java:defs.bzl", "java_binary")
+
+#
+# CLI app
+#
 
 kt_jvm_library(
     name = "app_lib",
@@ -14,3 +18,4 @@ java_binary(
     main_class = "cli.Main",
     runtime_deps = [":app_lib"],
 )
+

@@ -6,8 +6,8 @@ https://github.com/bazelbuild/rules_kotlin/blob/master/examples/trivial/BUILD
 `com.expedia:graphql-kotlin:0.6.1` becomes
 `com_expedia_graphql_kotlin`
 
-
-`bazel query ...`
+List all targets
+- `bazel query ...`
 
 //app:myapp
 //app:app_lib
@@ -29,7 +29,8 @@ java_library(name = "java_deps",
 bazel build //src/main/kotlin:main
 
 
-`bazel build //...`
+Build all
+- `bazel build //...`
 
 Run output:
 - `./bazel-bin/src/main`
