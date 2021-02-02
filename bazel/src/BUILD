@@ -1,12 +1,10 @@
-load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library")
+load("@rules_java//java:defs.bzl", "java_library")
 
-kt_jvm_library(
-    name = "app_lib",
-    srcs = glob(["**/*.kt"]),
-)
+package(default_visibility = ["//visibility:public"])
 
-java_binary(
-    name = "main",
-    main_class = "cli.Main",
-    runtime_deps = [":app_lib"],
+java_library(
+    name = "java_deps",
+    exports = [
+        "@maven//:com_github_ajalt_clikt_clikt",
+    ],
 )
