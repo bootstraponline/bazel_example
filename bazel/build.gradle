@@ -13,8 +13,19 @@ repositories {
     }
 }
 
+sourceSets {
+    main.java.srcDirs = []
+    // /Users/mac/code/bazel_example/bazel/src/main/java
+    main.kotlin.srcDirs = ['src/main/java', 'src/main/kotlin']
+    main.resources.srcDirs = ['src/main/resources']
+
+    named("main") {
+        java.srcDir("src/main/java")
+    }
+}
+
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
 
     // replace with: https://github.com/Kotlin/kotlinx.serialization
     // https://repo1.maven.org/maven2/net/sf/json-lib/json-lib/2.4/
@@ -22,5 +33,12 @@ dependencies {
 
   //  compile("org.apache.httpcomponents:httpclient:4.5.3")
     implementation("org.apache.httpcomponents:httpcomponents-client:4.5.13")
+
+    // legacy: https://hc.apache.org/httpclient-legacy/index.html
+    implementation("commons-httpclient:commons-httpclient:3.1")
+    implementation("org.apache.httpcomponents:httpcore:4.4.6")
+    implementation("org.apache.httpcomponents:httpclient:4.5.3")
+    implementation("commons-io:commons-io:2.4")
+    implementation("org.codehaus.groovy:groovy-all:2.4.6")
 
 }

@@ -20,8 +20,8 @@
 
 package com.uber.jenkins.phabricator.conduit;
 
-import com.uber.jenkins.phabricator.PhabricatorPostbuildAction;
-import com.uber.jenkins.phabricator.PhabricatorPostbuildSummaryAction;
+//import com.uber.jenkins.phabricator.PhabricatorPostbuildAction;
+//import com.uber.jenkins.phabricator.PhabricatorPostbuildSummaryAction;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONNull;
@@ -32,7 +32,7 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
-import hudson.model.Run;
+//import hudson.model.Run;
 
 public class Differential {
 
@@ -76,28 +76,28 @@ public class Differential {
         }
     }
 
-    public void decorate(Run<?, ?> build, String phabricatorURL) {
-        // Add a badge next to the build
-        build.addAction(PhabricatorPostbuildAction.createShortText(
-                getRevisionID(true),
-                getPhabricatorLink(phabricatorURL)));
-        // Add some long-form text
-        PhabricatorPostbuildSummaryAction summary = createSummary(phabricatorURL);
-        build.addAction(summary);
-
-    }
-
-    public PhabricatorPostbuildSummaryAction createSummary(String phabricatorURL) {
-        return new PhabricatorPostbuildSummaryAction(
-                "com.uber.jenkins.phabricator.png",
-                getPhabricatorLink(phabricatorURL),
-                getDiffID(),
-                getRevisionID(true),
-                getAuthorName(),
-                getAuthorEmail(),
-                getCommitMessage()
-        );
-    }
+//    public void decorate(Run<?, ?> build, String phabricatorURL) {
+//        // Add a badge next to the build
+//        build.addAction(PhabricatorPostbuildAction.createShortText(
+//                getRevisionID(true),
+//                getPhabricatorLink(phabricatorURL)));
+//        // Add some long-form text
+//        PhabricatorPostbuildSummaryAction summary = createSummary(phabricatorURL);
+//        build.addAction(summary);
+//
+//    }
+//
+//    public PhabricatorPostbuildSummaryAction createSummary(String phabricatorURL) {
+//        return new PhabricatorPostbuildSummaryAction(
+//                "com.uber.jenkins.phabricator.png",
+//                getPhabricatorLink(phabricatorURL),
+//                getDiffID(),
+//                getRevisionID(true),
+//                getAuthorName(),
+//                getAuthorEmail(),
+//                getCommitMessage()
+//        );
+//    }
 
     private String getAuthorName() {
         return getOrElse(rawJSON, "authorName", UNKNOWN_AUTHOR);

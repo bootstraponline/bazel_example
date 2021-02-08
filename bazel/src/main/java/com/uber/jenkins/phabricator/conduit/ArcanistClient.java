@@ -21,11 +21,14 @@
 package com.uber.jenkins.phabricator.conduit;
 
 import com.uber.jenkins.phabricator.utils.CommonUtils;
+// TODO: Replace hudson Launcher code with standalone version.
 import hudson.Launcher;
-import hudson.util.ArgumentListBuilder;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ArcanistClient {
 
@@ -48,16 +51,18 @@ public class ArcanistClient {
         this.arguments = arguments;
     }
 
-    private ArgumentListBuilder getConduitCommand() {
-        ArgumentListBuilder builder = new ArgumentListBuilder(this.arcPath, this.methodName);
-        builder.add(arguments);
+    private List<String> getConduitCommand() {
+        List<String> builder = new ArrayList<String>();
+        builder.add(this.arcPath);
+        builder.add(this.methodName);
+        builder.addAll(Arrays.asList(arguments));
 
         if (!CommonUtils.isBlank(this.conduitUrl)) {
             builder.add("--conduit-uri=" + this.conduitUrl);
         }
 
         if (!CommonUtils.isBlank(this.conduitToken)) {
-            builder.addMasked("--conduit-token=" + this.conduitToken);
+            builder.add("--conduit-token=" + this.conduitToken);
         }
         return builder;
     }
