@@ -1,0 +1,26 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.21'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+
+    // replace with: https://github.com/Kotlin/kotlinx.serialization
+    // https://repo1.maven.org/maven2/net/sf/json-lib/json-lib/2.4/
+    implementation(name: "json-lib-2.4-jdk13")
+
+  //  compile("org.apache.httpcomponents:httpclient:4.5.3")
+    implementation("org.apache.httpcomponents:httpcomponents-client:4.5.13")
+
+}

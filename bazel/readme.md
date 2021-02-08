@@ -1,3 +1,15 @@
+## gradle setup
+
+Build
+
+`./gradlew assemble`
+
+## bazel setup
+
+Build all
+- `bazel build //...`
+
+---
 
 `brew install bazel buildifier`
 
@@ -28,9 +40,6 @@ java_library(name = "java_deps",
 
 bazel build //src/main/kotlin:main
 
-
-Build all
-- `bazel build //...`
 
 Run output:
 - `./bazel-bin/src/main`
