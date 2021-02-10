@@ -4,6 +4,14 @@ Build
 
 `./gradlew assemble`
 
+Build release jar
+
+`./gradlew shadowJar`
+
+Run release jar
+
+`java -jar ./build/libs/coverage.jar`
+
 ## bazel setup
 
 Build all
