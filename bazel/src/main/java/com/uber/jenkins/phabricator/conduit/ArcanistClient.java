@@ -20,9 +20,8 @@
 
 package com.uber.jenkins.phabricator.conduit;
 
+import cli.RunCommand;
 import com.uber.jenkins.phabricator.utils.CommonUtils;
-// TODO: Replace hudson Launcher code with standalone version.
-import hudson.Launcher;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -67,12 +66,12 @@ public class ArcanistClient {
         return builder;
     }
 
-    private Launcher.ProcStarter getCommand(Launcher.ProcStarter starter) throws IOException {
-        return starter.cmds(this.getConduitCommand());
+    private List<String> getCommand() {
+        return this.getConduitCommand();
     }
 
-    public int callConduit(Launcher.ProcStarter starter, PrintStream stderr) throws IOException, InterruptedException {
-        Launcher.ProcStarter command = this.getCommand(starter);
-        return command.stdout(stderr).stderr(stderr).join();
+    public void callConduit() {
+        String output = RunCommand.run(getCommand(), "");
+        System.out.println(output);
     }
 }
