@@ -9,8 +9,8 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 
-    flatDir {
-        dirs 'libs'
+    maven {
+        url "https://repo.jenkins-ci.org/public/"
     }
 }
 
@@ -40,20 +40,13 @@ jar {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
-
-    // replace with: https://github.com/Kotlin/kotlinx.serialization
-    // https://repo1.maven.org/maven2/net/sf/json-lib/json-lib/2.4/
-    implementation(name: "json-lib-2.4-jdk13")
-
-  //  compile("org.apache.httpcomponents:httpclient:4.5.3")
     implementation("org.apache.httpcomponents:httpcomponents-client:4.5.13")
-
-    // legacy: https://hc.apache.org/httpclient-legacy/index.html
     implementation("commons-httpclient:commons-httpclient:3.1")
     implementation("org.apache.httpcomponents:httpcore:4.4.6")
     implementation("org.apache.httpcomponents:httpclient:4.5.3")
     implementation("commons-io:commons-io:2.4")
     implementation("commons-lang:commons-lang:2.6")
     implementation("org.codehaus.groovy:groovy-all:2.4.6")
-
+    implementation("net.sf.ezmorph:ezmorph:1.0.6")
+    implementation("org.kohsuke.stapler:json-lib:2.4-jenkins-3")
 }

@@ -44,7 +44,22 @@ class Main {
 
         @JvmStatic
         fun main(args: Array<String>) {
-            println("hello!")
+            val diffID = System.getenv("PHABRICATOR_DIFF_ID") ?: throw Exception("not found")
+            val conduitURL = System.getenv("PHABRICATOR_URL") ?: throw Exception("not found")
+            val conduitToken = System.getenv("PHABRICATOR_API_TOKEN") ?: throw Exception("not found")
+            val phid = System.getenv("HARBORMASTER_BUILD_TARGET_PHID") ?: throw Exception("not found")
+            val harbormasterCoverage = mutableMapOf(
+                "test_diff.go" to "UCCU"
+            )
+
+            postCoverage(
+                diffID = diffID,
+                conduitURL = conduitURL,
+                conduitToken = conduitToken,
+                phid = phid,
+                harbormasterCoverage = harbormasterCoverage
+            )
+
 
             // 1. post fake coverage data to an open diff
             // 2. convert golang coverage and post to open diff
