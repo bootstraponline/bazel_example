@@ -5,6 +5,6 @@ bazel-out
 bazel-testlogs
 rules_kotlin
 .ijwb/
-build/
 .gradle/
 .idea/
+gradleBuild/

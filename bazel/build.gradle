@@ -39,6 +39,10 @@ jar {
     }
 }
 
+// Avoid conflict with bazel BUILD file at the root
+// by default gradle uses a 'build' folder
+buildDir = 'gradleBuild'
+
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("org.apache.httpcomponents:httpcomponents-client:4.5.13")
