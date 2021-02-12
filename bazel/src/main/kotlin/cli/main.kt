@@ -18,6 +18,8 @@ class Main {
             phid: String,
             harbormasterCoverage: Map<String, String>
         ) {
+            println("diffID: $diffID, conduitURL: $conduitURL, phid: $phid")
+
             val conduitAPIClient = ConduitAPIClient(conduitURL, conduitToken)
 
             val logger = Logger(System.out)
@@ -41,15 +43,18 @@ class Main {
             }
         }
 
+        private fun getenv(name: String): String {
+            return System.getenv(name) ?: throw Exception("$name environment variable not found")
+        }
 
         @JvmStatic
         fun main(args: Array<String>) {
-            val diffID = System.getenv("PHABRICATOR_DIFF_ID") ?: throw Exception("not found")
-            val conduitURL = System.getenv("PHABRICATOR_URL") ?: throw Exception("not found")
-            val conduitToken = System.getenv("PHABRICATOR_API_TOKEN") ?: throw Exception("not found")
-            val phid = System.getenv("HARBORMASTER_BUILD_TARGET_PHID") ?: throw Exception("not found")
+            val diffID = getenv("PHABRICATOR_DIFF_ID")
+            val conduitURL = getenv("PHABRICATOR_URL")
+            val conduitToken = getenv("PHABRICATOR_API_TOKEN")
+            val phid = getenv("HARBORMASTER_BUILD_TARGET_PHID")
             val harbormasterCoverage = mutableMapOf(
-                "test_diff.go" to "UCCU"
+                "test_diff.go" to "UCCU",
             )
 
             postCoverage(

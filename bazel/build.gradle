@@ -25,6 +25,7 @@ sourceSets {
     }
 }
 
+// ./gradlew shadowJar
 // java -jar ./build/libs/coverage.jar
 shadowJar {
     archiveBaseName.set('coverage')
