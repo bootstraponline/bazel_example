@@ -7,7 +7,7 @@ load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library")
 
 kt_jvm_library(
     name = "app_lib",
-    srcs = glob(["**/*.kt"]),
+    srcs = glob(["**/*.kt", "**/*.java"]),
     deps = [
         "//:java_deps",
     ],
