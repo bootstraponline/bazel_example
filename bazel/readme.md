@@ -12,6 +12,10 @@ Run release jar
 
 `java -jar ./build/libs/coverage.jar`
 
+## graal vm native image
+
+`native-image -jar coverage.jar`
+
 ## bazel setup
 
 Build all

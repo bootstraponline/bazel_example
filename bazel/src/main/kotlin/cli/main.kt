@@ -8,6 +8,8 @@ import com.uber.jenkins.phabricator.tasks.SendHarbormasterResultTask
 import com.uber.jenkins.phabricator.tasks.Task
 import com.uber.jenkins.phabricator.unit.UnitResults
 import com.uber.jenkins.phabricator.utils.Logger
+import java.lang.reflect.Field
+import java.lang.reflect.Method
 
 class Main {
     companion object {
@@ -47,8 +49,33 @@ class Main {
             return System.getenv(name) ?: throw Exception("$name environment variable not found")
         }
 
+        // Groovy has reflective access warnings.
+        // https://stackoverflow.com/a/53517025
+        fun disableAccessWarnings() {
+            try {
+                val unsafeClass = Class.forName("sun.misc.Unsafe")
+                val field: Field = unsafeClass.getDeclaredField("theUnsafe")
+                field.isAccessible = true
+                val unsafe: Any = field.get(null)
+                val putObjectVolatile: Method = unsafeClass.getDeclaredMethod(
+                    "putObjectVolatile",
+                    Any::class.java,
+                    Long::class.javaPrimitiveType,
+                    Any::class.java
+                )
+                val staticFieldOffset: Method = unsafeClass.getDeclaredMethod("staticFieldOffset", Field::class.java)
+                val loggerClass = Class.forName("jdk.internal.module.IllegalAccessLogger")
+                val loggerField: Field = loggerClass.getDeclaredField("logger")
+                val offset = staticFieldOffset.invoke(unsafe, loggerField) as Long
+                putObjectVolatile.invoke(unsafe, loggerClass, offset, null)
+            } catch (ignored: java.lang.Exception) {
+            }
+        }
+
         @JvmStatic
         fun main(args: Array<String>) {
+            disableAccessWarnings()
+
             val diffID = getenv("PHABRICATOR_DIFF_ID")
             val conduitURL = getenv("PHABRICATOR_URL")
             val conduitToken = getenv("PHABRICATOR_API_TOKEN")
